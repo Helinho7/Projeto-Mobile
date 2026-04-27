@@ -2,9 +2,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
+//Fonte
+import { useFonts, Montserrat_500Medium, Montserrat_600SemiBold } from "@expo-google-fonts/montserrat";
 
 //Tela do Sobre 
 import Sobre from './telas/Sobre'
+import { View } from "react-native";
 
 //Configuração do Menu
 const Tab = createBottomTabNavigator();
@@ -25,8 +28,8 @@ function Menu(){
                 : 'paw-outline'; 
               } if(route.name=== "Sobre3") {
                 iconName = focused 
-                ? 'paw'
-                : 'paw-outline'; 
+                ? 'cut'
+                : 'cut-outline'; 
               }
 
                 return <Ionicons name={iconName} size={24} color={color}/>
@@ -43,6 +46,17 @@ function Menu(){
 }
 
 export default function App() {
+
+
+  //CARREGA A FONTE 
+  const [fonteCarregada] = useFonts({"Montserrat": Montserrat_500Medium,
+                                      "MontBold": Montserrat_600SemiBold});
+
+  //verifica se a fonte está carregada
+  if(!fonteCarregada){
+    return<View></View>
+  }
+  
   return <NavigationContainer>
             <Menu />
           </NavigationContainer>;

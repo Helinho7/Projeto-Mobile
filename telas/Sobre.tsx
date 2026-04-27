@@ -8,18 +8,20 @@ import TextoPadrao from '../componentes/TextoPadrão';
 export default function Sobre() {
 
   //Configuração do Vídeo
-  const player = useVideoPlayer('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', player=>{ player.loop=true; player.play();});
+  const player = useVideoPlayer(require('../assets/SALAO.mp4'), player=>{ player.loop=true; player.play();});
   
   return (
     <ScrollView style={styles.container}>
       <StatusBar style="light" />
-      <Image source={require('../assets/Pesca.png')} style={styles.logo}resizeMode='contain'/>
+      <Image source={require('../assets/logo.png')} style={styles.logo}resizeMode='contain'/>
       <TextoPadrao estiloEspecifico={styles.texto}>
-        A helios pesca é uma empresa tradicional no ramos da pesca, 
-        {'\n'}onde pai e filho fundaram a empresa pelo fato de que {/*utilizamos o {'\n'} pra pular linha*/}
-        {'\n'}ambos são amantes da pesca
+        Na JK Visual, cada corte é pensado para valorizar o estilo e a personalidade de cada cliente. 
+        {'\n'}Com técnica, precisão e atenção aos detalhes, a barbearia oferece um atendimento de qualidade em um ambiente moderno e confortável.
+        {'\n'}Mais do que um corte de cabelo, a JK Visual entrega confiança, estilo e um visual renovado. 
+        {'\n'}✂️💈JK Visual — seu estilo em destaque.
+        
       </TextoPadrao>
-      <Image source={require('../assets/PESCA1.jpg')} style={styles.logo}resizeMode='contain'/>
+      <Image source={require('../assets/PESCA1.jpeg')} style={styles.logo1}resizeMode='contain'/>
       <VideoView player={player} style={styles.video} allowsPictureInPicture/>
     </ScrollView>
   );
@@ -28,21 +30,28 @@ export default function Sobre() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#dedede',
+    backgroundColor: '#000',
     paddingHorizontal: 16,
   },
   logo: {
-    width: 300,
-    height: 300,
+    width: 250,
+    height: 250,
+    alignSelf: 'center',
+
+  },
+  logo1: {
+    width: 320,
+    height: 320,
     alignSelf: 'center',
 
   },
   video: {
-    width: 350,
-    height: 275,
+    width: 380,
+    height: 320,
     alignSelf: 'center',
   },
   texto: {
-    color: 'black',
+    color: 'white',
+    textAlign: 'center',
   }
 });
