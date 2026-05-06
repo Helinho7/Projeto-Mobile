@@ -1,65 +1,78 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import Produtos from './produto/Index';
+import ListaProdutos from './src/mocks/listaProdutos';
 
-//Fonte
+// Fonte
 import { useFonts, Montserrat_500Medium, Montserrat_600SemiBold } from "@expo-google-fonts/montserrat";
 
-//Tela do Sobre 
-import Sobre from './telas/Sobre'
+// Tela Sobre
+import Sobre from './telas/Sobre';
 import { View } from "react-native";
 
-//Configuração do Menu
+// Configuração do Menu
 const Tab = createBottomTabNavigator();
 
-//Cria a estrutura do Menu
-function Menu(){
-  return <Tab.Navigator
-          screenOptions={({route})=>({
-            tabBarIcon: ({focused, color}) => {
-              let iconName; 
-               if(route.name=== "Sobre") {
-                iconName = focused 
-                ? 'paw'
-                : 'paw-outline';               
-              } else if(route.name=== "Sobre2") {
-                iconName = focused 
-                ? 'paw'
-                : 'paw-outline'; 
-              } if(route.name=== "Sobre3") {
-                iconName = focused 
-                ? 'cut'
-                : 'cut-outline'; 
-              }
 
-                return <Ionicons name={iconName} size={24} color={color}/>
-            },
-
-            headerShown: false,
-            tabBarActiveTintColor: 'purple',
-            tabBarInactiveTintColor: 'gray',
-          })}>
-          <Tab.Screen name="Sobre" component={Sobre}/>
-          <Tab.Screen name="Sobre2" component={Sobre}/>
-          <Tab.Screen name="Sobre3" component={Sobre}/>
-        </Tab.Navigator>
+// ✅ FUNÇÃO QUE LIGA A LISTA COM A TELA
+function MenuProdutos() {
+  return <Produtos lista={ListaProdutos.lista} />;
 }
 
+
+// ✅ MENU
+function Menu(){
+  return (
+    <Tab.Navigator
+      screenOptions={({route})=>({
+        tabBarIcon: ({focused, color}) => {
+          let iconName: any;
+
+          if(route.name === "Sobre") {
+            iconName = focused ? 'storefront' : 'storefront-outline';
+          } 
+          else if(route.name === "Produtos") {
+            iconName = focused ? 'cut' : 'cut-outline';
+          } 
+          else if(route.name === "Conta") {
+            iconName = focused ? 'person' : 'person-outline';
+          }
+
+          return <Ionicons name={iconName} size={24} color={color}/>
+        },
+
+        headerShown: false,
+        tabBarActiveTintColor: 'purple',
+        tabBarInactiveTintColor: 'gray',
+      })}
+    >
+
+      {/* TELAS */}
+      <Tab.Screen name="Sobre" component={Sobre}/>
+      <Tab.Screen name="Produtos" component={MenuProdutos}/>
+      <Tab.Screen name="Conta" component={Sobre}/>
+
+    </Tab.Navigator>
+  );
+}
+
+
+// ✅ APP PRINCIPAL
 export default function App() {
 
+  const [fonteCarregada] = useFonts({
+    "Montserrat": Montserrat_500Medium,
+    "MontBold": Montserrat_600SemiBold
+  });
 
-  //CARREGA A FONTE 
-  const [fonteCarregada] = useFonts({"Montserrat": Montserrat_500Medium,
-                                      "MontBold": Montserrat_600SemiBold});
-
-  //verifica se a fonte está carregada
   if(!fonteCarregada){
-    return<View></View>
+    return <View />;
   }
   
-  return <NavigationContainer>
-            <Menu />
-          </NavigationContainer>;
+  return (
+    <NavigationContainer>
+      <Menu />
+    </NavigationContainer>
+  );
 }
-
-

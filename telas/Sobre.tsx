@@ -3,7 +3,7 @@ import { StyleSheet, Text, ScrollView, Image } from 'react-native';
 import { useVideoPlayer, VideoView } from 'expo-video'; 
 
 //Componente de Texto Parão 
-import TextoPadrao from '../componentes/TextoPadrão';
+import TextoPadrao from '../componentes/TextoPadrao';
 
 export default function Sobre() {
 
