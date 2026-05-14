@@ -17,41 +17,50 @@ const Tab = createBottomTabNavigator();
 
 // ✅ FUNÇÃO QUE LIGA A LISTA COM A TELA
 function MenuProdutos() {
-  return <Produtos lista={ListaProdutos.lista} />;
+  return (
+    <Produtos
+      titulo={ListaProdutos.titulo}
+      lista={ListaProdutos.lista}
+    />
+  );
 }
 
 
 // ✅ MENU
-function Menu(){
+function Menu() {
   return (
     <Tab.Navigator
-      screenOptions={({route})=>({
-        tabBarIcon: ({focused, color}) => {
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color }) => {
           let iconName: any;
 
-          if(route.name === "Sobre") {
+          if (route.name === "Sobre") {
             iconName = focused ? 'storefront' : 'storefront-outline';
-          } 
-          else if(route.name === "Produtos") {
+          }
+          else if (route.name === "Produtos") {
             iconName = focused ? 'cut' : 'cut-outline';
-          } 
-          else if(route.name === "Conta") {
+          }
+          else if (route.name === "Conta") {
             iconName = focused ? 'person' : 'person-outline';
           }
 
-          return <Ionicons name={iconName} size={24} color={color}/>
+          return <Ionicons name={iconName} size={24} color={color} />;
         },
-
         headerShown: false,
-        tabBarActiveTintColor: 'purple',
+        tabBarStyle: {
+          backgroundColor: '#0f0f0f',
+          borderTopColor: '#1e1e1e',
+          borderTopWidth: 1,
+          },
+        tabBarActiveTintColor: '#c9960c',
         tabBarInactiveTintColor: 'gray',
+
       })}
     >
-
       {/* TELAS */}
-      <Tab.Screen name="Sobre" component={Sobre}/>
-      <Tab.Screen name="Produtos" component={MenuProdutos}/>
-      <Tab.Screen name="Conta" component={Sobre}/>
+      <Tab.Screen name="Sobre" component={Sobre} />
+      <Tab.Screen name="Produtos" component={MenuProdutos} />
+      <Tab.Screen name="Conta" component={Sobre} />
 
     </Tab.Navigator>
   );
@@ -63,13 +72,13 @@ export default function App() {
 
   const [fonteCarregada] = useFonts({
     "Montserrat": Montserrat_500Medium,
-    "MontBold": Montserrat_600SemiBold
+    "MontBold": Montserrat_600SemiBold,
   });
 
-  if(!fonteCarregada){
+  if (!fonteCarregada) {
     return <View />;
   }
-  
+
   return (
     <NavigationContainer>
       <Menu />
