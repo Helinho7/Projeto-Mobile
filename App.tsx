@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Produtos from './produto/Index';
 import ListaProdutos from './src/mocks/listaProdutos';
+import Conta from './telas/Conta';
 
 // Fonte
 import { useFonts, Montserrat_500Medium, Montserrat_600SemiBold } from "@expo-google-fonts/montserrat";
@@ -60,7 +61,7 @@ function Menu() {
       {/* TELAS */}
       <Tab.Screen name="Sobre" component={Sobre} />
       <Tab.Screen name="Produtos" component={MenuProdutos} />
-      <Tab.Screen name="Conta" component={Sobre} />
+      <Tab.Screen name="Conta" component={Conta}/>
 
     </Tab.Navigator>
   );
